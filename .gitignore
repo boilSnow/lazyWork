@@ -5,5 +5,5 @@
 /build
 captures
 .externalNativeBuild
-libs/
-.idea/
+/.idea
+.cxx

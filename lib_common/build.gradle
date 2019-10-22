@@ -1,0 +1,56 @@
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+
+android {
+    compileSdkVersion cAndroid.compileSdkVersion
+    buildToolsVersion cAndroid.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion cAndroid.minSdkVersion
+        targetSdkVersion cAndroid.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            buildConfigField("boolean", "isDebug", "false")
+            buildConfigField("boolean", "isOutLog", "${cFlag.isDebug}")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+
+        debug {
+            buildConfigField("boolean", "isDebug", "true")
+            buildConfigField("boolean", "isOutLog", "${cFlag.isDebug}")
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ["*.jar"], dir: "libs")
+    testImplementation "junit:junit:4.12"
+    androidTestImplementation "com.android.support.test:runner:1.0.2"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
+
+    api "${cPage.kotlin}:${cVersion.kotlin}"
+
+    api "${cPage.multidex}:${cVersion.multidex}"
+    api "${cPage.recyclerView}:${cVersion.support}"
+    api "${cPage.appcompatV7}:${cVersion.support}"
+
+    api "${cPage.arouterApi}:${cVersion.arouterApi}"
+    api "${cPage.glide}:${cVersion.glide}"
+
+    api "${cPage.retrofit2}:${cVersion.retrofit2}"
+    api "${cPage.retrofit2Gson}:${cVersion.retrofit2}"
+    api "${cPage.retrofit2Scalars}:${cVersion.retrofit2}"
+    api "${cPage.retrofit2RxJava}:${cVersion.retrofit2}"
+    api "${cPage.rxAndroid}:${cVersion.rxAndroid}"
+    api "${cPage.rxJava}:${cVersion.rxJava}"
+}
