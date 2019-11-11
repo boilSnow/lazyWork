@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">lib_common</string>
+    <!--列表数据状态文本-->
+    <string name="l00_list_data_loading">加载中</string>
+    <string name="l00_list_data_null">没有更多数据</string>
+    <string name="l00_list_data_end">到底了</string>
+
+    <string name="l00_text_vain_test_show">这是一段测试演示文字1这是一段测试演示文字2这是一段测试演示文字3这是一段测试演示文字4这是一段测试演示文字5这是一段测试演示文字6这是一段测试演示文字7这是一段测试演示文字8这是一段测试演示文字9</string>
+
+    <string name="l00_text_safety">提示</string>
+    <string name="l00_text_affirm">确认</string>
+    <string name="l00_text_cancel">取消</string>
+
 </resources>

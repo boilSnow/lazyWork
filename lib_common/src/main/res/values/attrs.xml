@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--圆形背景TextView-->
+    <declare-styleable name="CircleTextView">
+        <!--填充颜色-->
+        <attr name="solidColor" format="color" />
+        <!--边框颜色-->
+        <attr name="strokeColor" format="color" />
+        <!--边框宽度-->
+        <attr name="strokeWith" format="dimension" />
+        <!--边框角度-->
+        <attr name="radius" format="dimension" />
+        <!--边框角度-->
+        <attr name="radiusTopLeft" format="dimension" />
+        <!--边框角度-->
+        <attr name="radiusTopRight" format="dimension" />
+        <!--边框角度-->
+        <attr name="radiusBottomLeft" format="dimension" />
+        <!--边框角度-->
+        <attr name="radiusBottomRight" format="dimension" />
+    </declare-styleable>
+
+</resources>

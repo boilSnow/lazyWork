@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  默认应用样式  -->
+    <style name="L00Theme" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
+    <!--  默认界面样式  -->
+    <style name="L00Activity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/L00Animation</item>
+        <item name="android:windowSoftInputMode">adjustPan|stateAlwaysHidden</item>
+        <item name="android:launchMode">singleTop</item>
+    </style>
+
+    <!--  默认界面进出动画  -->
+    <style name="L00Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/l00_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/l00_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/l00_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/l00_right_out</item>
+    </style>
+
+    <!--  从底部进入动画  -->
+    <style name="L00Animation4Bottom">
+        <item name="android:windowEnterAnimation">@anim/l00_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/l00_bottom_out</item>
+    </style>
+
+    <!--  默认文字样式  -->
+    <style name="L00Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/L00Text00</item>
+        <item name="android:textSize">@dimen/L00TextSize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!--  默认分割线  -->
+    <style name="L00DivideLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/L00Color01</item>
+    </style>
+
+</resources>

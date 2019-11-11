@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/L00Text"
+        android:layout_marginTop="@dimen/L00Padding"
+        android:visibility="gone"
+        tools:text="标题"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/vTitle"
+        style="@style/L00DivideLine"
+        android:layout_marginTop="@dimen/L00Padding"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvConnect"
+        style="@style/L00Text"
+        android:maxLines="5"
+        android:padding="@dimen/L00Padding"
+        android:textSize="@dimen/L00TextSize"
+        tools:text="@string/l00_text_vain_test_show" />
+
+    <View style="@style/L00DivideLine" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/L00BarHeight"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvCancel"
+            style="@style/L00Text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/l00_text_cancel" />
+
+        <View
+            android:id="@+id/vCancel"
+            style="@style/L00DivideLine"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tvAffirm"
+            style="@style/L00Text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/l00_text_affirm" />
+    </LinearLayout>
+
+</LinearLayout>

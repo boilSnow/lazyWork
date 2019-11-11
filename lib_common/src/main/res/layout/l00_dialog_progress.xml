@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/L00BarHeight"
+    android:background="@color/L00Color00"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <ProgressBar
+        android:id="@+id/pbBar"
+        android:layout_width="@dimen/L00ImgSize20"
+        android:layout_height="@dimen/L00ImgSize20" />
+
+    <TextView
+        android:id="@+id/tvText"
+        style="@style/L00Text"
+        android:layout_marginLeft="@dimen/L00Padding"
+        android:layout_marginRight="@dimen/L00Padding"
+        tools:text="text" />
+
+</LinearLayout>

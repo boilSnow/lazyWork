@@ -13,7 +13,7 @@ android {
         versionName "1.0"
 
         multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -35,14 +35,16 @@ android {
 dependencies {
     implementation fileTree(include: ["*.jar"], dir: "libs")
     testImplementation "junit:junit:4.12"
-    androidTestImplementation "com.android.support.test:runner:1.0.2"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     api "${cPage.kotlin}:${cVersion.kotlin}"
 
-    api "${cPage.multidex}:${cVersion.multidex}"
-    api "${cPage.recyclerView}:${cVersion.support}"
-    api "${cPage.appcompatV7}:${cVersion.support}"
+    api "${cPage.aXMultidex}:${cVersion.multidex}"
+    api "${cPage.aXAppcompat}:${cVersion.androidX}"
+    api "${cPage.aXKotlinCore}:${cVersion.androidX}"
+    api "${cPage.aXRecyclerView}:${cVersion.recyclerView}"
+    api "${cPage.aXConstraintLayout}:${cVersion.constraintLayout}"
 
     api "${cPage.arouterApi}:${cVersion.arouterApi}"
     api "${cPage.glide}:${cVersion.glide}"
