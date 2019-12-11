@@ -7,27 +7,28 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.boilsnow.lib.common.R
-import com.boilsnow.lib.common.entente.ViewEntente
+import com.boilsnow.lib.common.entente.BaseMvpEntente
 import com.boilsnow.lib.common.ui.assist.BaseRecyclerAdapter
 import com.boilsnow.lib.common.ui.assist.RecyclerFootItemHolder
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
- * Description:列表fragment
- * Remark:
+ * Description:mvp框架activity定义
+ * Remark:显示list
  */
-abstract class BaseListFragment<D> : BaseFragment() {
+abstract class BaseMvpListFragment<P : BaseMvpEntente.IPresenter, D> : BaseMvpFragment<P>(),
+    BaseMvpEntente.IView {
 
-    protected var isUpdateOn = false     //开启刷新
-    protected var isLoadOn = false       //开启加载
-    protected var isShowFoot = false    //开启显示底部视图
+    protected var isUpdateOn = false        //开启刷新
+    protected var isLoadOn = false          //开启加载
+    protected var isShowFoot = false        //开启显示底部视图
 
     protected var mRvList: RecyclerView? = null
     protected var mSrView: SwipeRefreshLayout? = null
 
     protected lateinit var mAdapter: BaseRecyclerAdapter<D>
     protected var mDataType = RecyclerFootItemHolder.TYPE.VAIN
-    protected var mAction: ViewEntente.OnListAction? = null
 
     override fun getLayoutID() = R.layout.l00_include_list_recycler
 
@@ -44,7 +45,7 @@ abstract class BaseListFragment<D> : BaseFragment() {
 
         mRvList?.adapter = mAdapter
         mSrView?.isEnabled = isUpdateOn
-        if (isUpdateOn) mSrView?.setOnRefreshListener { mAction?.onUpdateListData(this) }
+        if (isUpdateOn) mSrView?.setOnRefreshListener { onUpdateListData() }
         if (isLoadOn) mRvList?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -59,20 +60,16 @@ abstract class BaseListFragment<D> : BaseFragment() {
                     }
                     else -> (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
                 }
-                if (mDataType == RecyclerFootItemHolder.TYPE.DATA_LOADING           //还有更多数据
+                if (mDataType == RecyclerFootItemHolder.TYPE.DATA_LOADING       //还有更多数据
                     && layoutManager.childCount > 0                                 //子条目数大于0
                     && lastVisiblePosition >= layoutManager.itemCount - 1           //当前屏幕显示的最后视图是最后的数据
                     && layoutManager.itemCount >= layoutManager.childCount
-                ) mAction?.onLoadListData(this@BaseListFragment)
+                ) onLoadListData()
             }
         })
     }
 
-    open fun setOnListAction(action: ViewEntente.OnListAction?) {
-        mAction = action
-    }
-
-    open fun setListData(
+    protected fun setListData(
         data: ArrayList<D>?, isUpdate: Boolean = true, min: Int = 0, size: Int = 10
     ) {
         mDataType = if (data?.size ?: 0 >= size) RecyclerFootItemHolder.TYPE.DATA_LOADING else {
@@ -86,9 +83,13 @@ abstract class BaseListFragment<D> : BaseFragment() {
         } else mAdapter.addData(data, mDataType)
     }
 
-    fun hideLoading() {
+    protected open fun hideLoading() {
         if (isUpdateOn) mSrView?.isRefreshing = false
     }
+
+    protected open fun onUpdateListData() {}
+
+    protected open fun onLoadListData() {}
 
     protected abstract fun listLayoutManager(): LinearLayoutManager
 

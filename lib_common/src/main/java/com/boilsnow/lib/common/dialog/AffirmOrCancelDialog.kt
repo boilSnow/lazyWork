@@ -1,4 +1,4 @@
-package com.boilsnow.lib.common.ui.assist
+package com.boilsnow.lib.common.dialog
 
 import android.app.Dialog
 import android.content.Context

@@ -1,6 +1,9 @@
 package com.boilsnow.lib.common.ui.assist
 
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -45,5 +48,17 @@ open class RecyclerFootItemHolder<D>(itemView: View) : BaseRecyclerItemHolder<D>
             TYPE.DATA_END -> itemView.context.resources.getString(R.string.l00_list_data_end)
             else -> ""
         }
+    }
+}
+
+/**
+ * Description:无效条目
+ * Remark:
+ */
+open class InvalidItemHolder<D>(context: Context, parent: ViewGroup) : BaseRecyclerItemHolder<D>(
+    LayoutInflater.from(context).inflate(R.layout.l00_item_invalid, parent, false)
+) {
+
+    override fun bindData(data: D) {
     }
 }

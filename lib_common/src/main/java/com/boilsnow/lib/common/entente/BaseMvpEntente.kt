@@ -5,7 +5,7 @@ package com.boilsnow.lib.common.entente
  * Remark:
  */
 interface BaseMvpEntente {
-    //view层定义
+    //mvp框架view层定义
     interface IView {
         //显示进度条
         fun showProgress(text: String = "")
@@ -17,7 +17,7 @@ interface BaseMvpEntente {
         fun showHintText(text: String, isWarn: Boolean = false)
     }
 
-    //控制层定义
+    //mvp框架控制层定义
     interface IPresenter {
         //资源销毁
         fun onDestroy()
@@ -25,14 +25,17 @@ interface BaseMvpEntente {
 
     //列表数据    eValue: 扩展保留字段
     interface IListDataView<D> : IView {
-        fun updateListData(data: ArrayList<D>?, isFirstPage: Boolean = true, eValue: Int = 0)
+        fun updateListData(
+            data: ArrayList<D>?, isFirstPage: Boolean = true,
+            eValue: Int = 0, tValue: String = ""
+        )
     }
 
     //列表事件
     interface IListDataPresenter : IPresenter {
-        fun updateListData(eValue: Int = 0)
+        fun updateListData(eValue: Int = 0, tValue: String = "")
 
-        fun loadListData(eValue: Int = 0)
+        fun loadListData(eValue: Int = 0, tValue: String = "")
     }
 
     //更新数据

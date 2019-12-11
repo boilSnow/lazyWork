@@ -1,8 +1,11 @@
 package com.boilsnow.lib.common.util
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
+import android.graphics.Rect
 import android.text.InputFilter
 import android.view.View
 import android.view.Window
@@ -43,21 +46,20 @@ object ViewTool {
     }
 
     //隐藏软键盘
-    fun hideInput(atyContext: Context) {
-        val manager =
-            atyContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if ((atyContext as Activity).currentFocus != null) manager.hideSoftInputFromWindow(
-            atyContext.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS
-        )
-    }
-
-    //隐藏软键盘
     fun hideInput(context: Context, viewList: ArrayList<View>) {
         val manager =
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         for (view in viewList) manager.hideSoftInputFromWindow(
             view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS
         )
+    }
+
+    //软键盘是否显示
+    fun isInputVisible(activity: Activity): Boolean {
+        val dView = activity.window.decorView
+        val rect = Rect()
+        dView.getWindowVisibleDisplayFrame(rect)
+        return dView.height * 2 / 3 > rect.bottom
     }
 
     //生成 小数过滤器
@@ -70,7 +72,7 @@ object ViewTool {
             if (text.substring(dStart).length > places) return@InputFilter ""
             if (dStart == 0 && text.substring(dStart).length <= places) return@InputFilter "0."
         }
-        if (index != -1 && text.substring(dStart).length > places && dStart > index) return@InputFilter ""
+        if (index != -1 && text.substring(index).length > places && dStart > index) return@InputFilter ""
         return@InputFilter null
     }
 
@@ -95,4 +97,26 @@ object ViewTool {
         ) "" else null
     }
 
+    //生成 特殊字符
+    fun createFilter4Spe() = InputFilter { source, _, _, _, _, _ ->
+        return@InputFilter if (
+            Pattern
+                .compile(
+                    "[`~!@#$%^&*()-+=]" +
+                            "|[~！@#￥%……&*（）—+=]" +
+                            "|[,.;'”’?/<>|\\\\{}]" +
+                            "|[，。；：？、《》｜「」［］【】]"
+                )
+                .matcher(source)
+                .find()
+        ) "" else null
+    }
+
+    //根据密度获取像素
+    fun dip2px(context: Context, dpValue: Float) =
+        (dpValue * (context.resources.displayMetrics.density) + 0.5f).toInt()
+
+    //根据像素获取密度
+    fun px2dip(context: Context, pxValue: Float) =
+        (pxValue / (context.resources.displayMetrics.density) + 0.5f).toInt()
 }

@@ -1,7 +1,8 @@
-package com.boilsnow.lib.common.ui.assist
+package com.boilsnow.lib.common.dialog
 
 import android.content.Context
 import com.boilsnow.lib.common.R
+import com.boilsnow.lib.common.dialog.AffirmOrCancelDialog
 import com.boilsnow.lib.common.entente.ViewEntente
 
 /**

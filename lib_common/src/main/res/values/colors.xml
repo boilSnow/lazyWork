@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--  普通颜色  -->
+    <!--普通颜色-->
     <color name="L00Color00">#FFFFFF</color>
     <color name="L00Color01">#DEDEDE</color>
 
-    <!--  字体颜色  -->
+    <!--字体颜色-->
     <color name="L00Text00">#222222</color>
 
 </resources>

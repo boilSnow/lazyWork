@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.alibaba.android.arouter.launcher.ARouter
 import com.boilsnow.lib.common.entente.ViewEntente
 import com.boilsnow.lib.common.ui.assist.ToastAss
 import com.boilsnow.lib.common.util.LL
@@ -18,7 +19,7 @@ abstract class BaseFragment : Fragment() {
 
     private var mView: View? = null
     protected var mIsViewLoad = false
-    protected var mFragmentAction: ViewEntente.OnSkipAction? = null
+    protected var mFragmentAction: ViewEntente.OnFragmentAction? = null
 
     protected abstract fun getLayoutID(): Int
 
@@ -51,7 +52,7 @@ abstract class BaseFragment : Fragment() {
         loadData(eValue)
     }
 
-    fun setOnFragmentActionListener(action: ViewEntente.OnSkipAction) {
+    fun setOnFragmentActionListener(action: ViewEntente.OnFragmentAction) {
         mFragmentAction = action
     }
 
@@ -69,4 +70,9 @@ abstract class BaseFragment : Fragment() {
         if (requestCode < 0) startActivity(intent) else startActivityForResult(intent, requestCode)
     }
 
+    protected fun toRouteActivity(path: String, extras: Bundle? = null, requestCode: Int = -1) {
+        var build = ARouter.getInstance().build(path)
+        if (extras != null) build = build.with(extras)
+        build.navigation(activity, requestCode)
+    }
 }

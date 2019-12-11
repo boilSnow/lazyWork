@@ -1,6 +1,7 @@
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion cAndroid.compileSdkVersion
@@ -45,9 +46,11 @@ dependencies {
     api "${cPage.aXKotlinCore}:${cVersion.androidX}"
     api "${cPage.aXRecyclerView}:${cVersion.recyclerView}"
     api "${cPage.aXConstraintLayout}:${cVersion.constraintLayout}"
+    api "${cPage.axDesign}:${cVersion.axDesign}"
 
     api "${cPage.arouterApi}:${cVersion.arouterApi}"
     api "${cPage.glide}:${cVersion.glide}"
+    kapt "${cPage.glideCompiler}:${cVersion.glide}"
 
     api "${cPage.retrofit2}:${cVersion.retrofit2}"
     api "${cPage.retrofit2Gson}:${cVersion.retrofit2}"

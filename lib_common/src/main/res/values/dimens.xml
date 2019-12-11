@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--  字体大小  -->
+    <!--字体大小-->
     <dimen name="L00TextSize">15sp</dimen>
     <dimen name="L00TextSize13">13sp</dimen>
 
-    <!--  内边距  -->
+    <!--内边距-->
     <dimen name="L00Padding">10dp</dimen>
 
-    <!--  视图大小  -->
+    <!--视图大小-->
     <dimen name="L00BarHeight">50dp</dimen>
     <dimen name="L00ImgSize20">20dp</dimen>
     <dimen name="L00ImgSize40">40dp</dimen>
+
+    <!--分割线高度-->
+    <dimen name="L00DivideHeight">1dp</dimen>
+    <dimen name="L00DivideBarHeight">10dp</dimen>
 
 </resources>

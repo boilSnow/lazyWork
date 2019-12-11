@@ -7,9 +7,12 @@ import android.os.Environment
 import android.text.TextUtils
 import android.widget.ImageView
 import com.boilsnow.lib.common.R
-import com.boilsnow.lib.common.util.assist.PictureCircleTransform
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,49 +25,53 @@ object PictureTool {
 
     //加载图片 type 1 长方形(w>h)  2 正方形
     fun loadPicture(
-        context: Context?, path: String?, view: ImageView?, type: Int = -1,
-        defaultSrc: Int = R.drawable.l00_img_default_1,
-        isSkipCache: Boolean = false, isNullScale: Boolean = false
+        context: Context?, view: ImageView?, type: Int = -1, path: String?,
+        defaultSrc: Int = -1, isSkipCache: Boolean = false, isNullScale: Boolean = false
     ) = loadGlidePicture(
-        context = context, path = path, view = view, type = type, radius = 0F,
+        context = context, path = path, view = view, type = type,
+        radius = 0F,
         defaultSrc = defaultSrc, isCircle = false,
         isSkipCache = isSkipCache, isNullScale = isNullScale
     )
 
     //加载圆形/圆角图片 type 1 长方形(w>h)  2 正方形
     fun loadCirclePicture(
-        context: Context?, path: String?, view: ImageView?, type: Int = -1,
-        radius: Float = 0F, defaultSrc: Int = R.drawable.l00_img_default_1,
-        isSkipCache: Boolean = false, isNullScale: Boolean = false
+        context: Context?, view: ImageView?, type: Int = -1, path: String?, radius: Float = 0F,
+        defaultSrc: Int = -1, isSkipCache: Boolean = false, isNullScale: Boolean = false
     ) = loadGlidePicture(
-        context = context, path = path, view = view, type = type, radius = radius,
-        defaultSrc = defaultSrc, isCircle = true,
-        isSkipCache = isSkipCache, isNullScale = isNullScale
+        context = context, view = view, type = type, defaultSrc = defaultSrc, radius = radius,
+        path = path, isCircle = true, isSkipCache = isSkipCache, isNullScale = isNullScale
     )
 
     private fun loadGlidePicture(
-        context: Context?, path: String?, view: ImageView?, type: Int, radius: Float,
+        context: Context?, view: ImageView?, type: Int, path: String?, radius: Float,
         defaultSrc: Int, isCircle: Boolean, isSkipCache: Boolean, isNullScale: Boolean
     ) {
-        if (TextUtils.isEmpty(path) || context == null) return
-        val default = when (type) {
-            1 -> R.drawable.l00_img_default_1
-            2 -> R.drawable.l00_img_default_2
-            else -> defaultSrc
+        if (TextUtils.isEmpty(path) || context == null || view == null) return
+        val default = if (defaultSrc != -1) defaultSrc else when (type) {
+            1 -> R.drawable.l00_img_default_00
+            2 -> R.drawable.l00_img_default_01
+            else -> R.drawable.l00_img_default_00
         }
-        val glideBuild = Glide.with(context).load(path)
+
+        var options = RequestOptions
+            .circleCropTransform()
+            .placeholder(default)   //填充默认占位图
+            .error(default)         //填充错误占位图
+
         //跳过缓存
-        if (isSkipCache) glideBuild
+        if (isSkipCache) options = options
             .skipMemoryCache(isSkipCache)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
         //使用默认填充方式
-        if (!isNullScale) glideBuild.centerCrop()
-        //填充默认占位图
-        glideBuild.placeholder(default)
-        //转换为圆形
-        if (isCircle) glideBuild.transform(PictureCircleTransform(context, radius))
+        if (!isNullScale) options = options.centerCrop()
+        //转换为圆角
+        if (isCircle) {
+            options = if (radius == 0F) options.transform(CircleCrop())
+            else options.transform(CenterCrop(), RoundedCorners(radius.toInt()))
+        }
         //加载view
-        glideBuild.crossFade().into(view)
+        Glide.with(context).load(path).apply(options).into(view)
     }
 
     //压缩图片  大小单位:KB

@@ -24,6 +24,7 @@ abstract class ServiceObserver<D>(private val mView: BaseMvpEntente.IView) :
                 else -> onError(errText = tData.msg, errCode = tData.statusCode)
             }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -36,6 +37,7 @@ abstract class ServiceObserver<D>(private val mView: BaseMvpEntente.IView) :
 
     protected open fun onError(errText: String, errCode: Int = -1) {
         mView.hideProgress()
+        mView.showHintText(errText)
     }
 
     protected abstract fun onComplete(data: D)

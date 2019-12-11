@@ -1,6 +1,5 @@
 package com.boilsnow.lib.common.entente
 
-import android.os.Bundle
 import com.boilsnow.lib.common.ui.BaseFragment
 
 /**
@@ -9,12 +8,16 @@ import com.boilsnow.lib.common.ui.BaseFragment
  */
 interface ViewEntente {
 
-    //定义跳转动作回调
-    interface OnSkipAction {
-        //跳转回调
-        fun onSkip4Route(
-            fragment: BaseFragment, path: String, requestCode: Int, extras: Bundle? = null
-        )
+    //定义视图动作回调
+    interface OnFragmentAction
+
+    //定义视图滚动回调
+    interface OnFragmentScrollAction : OnFragmentAction {
+        //滚动监听
+        fun onFragmentScroll(oldY: Int, newY: Int, flag: Boolean = true)
+
+        //滚动停止监听
+        fun onFragmentScrollStop(nowY: Int, isUpScroll: Boolean, flag: Boolean = true)
     }
 
     //定义列表动作回调

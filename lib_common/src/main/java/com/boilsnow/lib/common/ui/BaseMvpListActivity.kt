@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.boilsnow.lib.common.R
 import com.boilsnow.lib.common.entente.BaseMvpEntente
 import com.boilsnow.lib.common.ui.assist.RecyclerFootItemHolder
 import com.boilsnow.lib.common.ui.assist.BaseRecyclerAdapter
@@ -28,11 +29,17 @@ abstract class BaseMvpListActivity<P : BaseMvpEntente.IPresenter, D> : BaseMvpAc
     protected lateinit var mAdapter: BaseRecyclerAdapter<D>
     protected var mDataType = RecyclerFootItemHolder.TYPE.VAIN
 
+    override fun setupViews() {
+        mRvList = findViewById(R.id.rvList)
+        mSrView = findViewById(R.id.srView)
+
+        mRvList?.layoutManager = listLayoutManager()
+    }
+
     override fun initialized() {
         mAdapter = listAdapter()
         mAdapter.setIsShowFootView(isShowFoot)
 
-        mRvList?.layoutManager = listLayoutManager()
         mRvList?.adapter = mAdapter
         mSrView?.isEnabled = isUpdateOn
         if (isUpdateOn) mSrView?.setOnRefreshListener { onUpdateListData() }

@@ -1,8 +1,8 @@
 package com.boilsnow.lib.common.ui
 
 import com.boilsnow.lib.common.entente.BaseMvpEntente
-import com.boilsnow.lib.common.ui.assist.DialogPick
-import com.boilsnow.lib.common.ui.assist.ProgressDialog
+import com.boilsnow.lib.common.dialog.DialogPick
+import com.boilsnow.lib.common.dialog.ProgressDialog
 
 /**
  * Description:mvp框架fragment定义
@@ -19,13 +19,14 @@ abstract class BaseMvpFragment<P : BaseMvpEntente.IPresenter> : BaseFragment(),
     abstract fun createPresenter(): P
 
     override fun showProgress(text: String) {
-        if (mProgressDialog == null) mProgressDialog = ProgressDialog(activity!!)
+        if (mProgressDialog == null) mProgressDialog =
+            ProgressDialog(activity!!)
         mProgressDialog?.updateData(text)
         mProgressDialog?.show()
     }
 
     override fun hideProgress() {
-        mProgressDialog?.hide()
+        mProgressDialog?.dismiss()
     }
 
     override fun showHintText(text: String, isWarn: Boolean) = if (!isWarn) toast(text)

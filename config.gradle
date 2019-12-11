@@ -12,12 +12,13 @@ ext {
     ]
 
     cVersion = [
-            kotlin          : "1.3.50",
+            kotlin          : "1.3.61",
 
             multidex        : "2.0.0",
             androidX        : "1.1.0",
             recyclerView    : "1.0.0",
             constraintLayout: "1.1.3",
+            axDesign        : "1.0.0",
 
             retrofit2       : "2.6.2",
             rxAndroid       : "2.0.1",
@@ -26,7 +27,7 @@ ext {
             arouterApi      : "1.3.1",
             arouterCompiler : "1.1.4",
 
-            glide           : "3.7.0",
+            glide           : "4.9.0",
 
             zxing           : "3.3.2",
             zxingEmbedded   : "3.6.0",
@@ -40,6 +41,7 @@ ext {
             aXKotlinCore      : "androidx.core:core-ktx",
             aXRecyclerView    : "androidx.recyclerview:recyclerview",
             aXConstraintLayout: "androidx.constraintlayout:constraintlayout",
+            axDesign          : "com.google.android.material:material",
 
             retrofit2         : "com.squareup.retrofit2:retrofit",
             retrofit2Gson     : "com.squareup.retrofit2:converter-gson",
@@ -52,6 +54,7 @@ ext {
             arouterCompiler   : "com.alibaba:arouter-compiler",
 
             glide             : "com.github.bumptech.glide:glide",
+            glideCompiler     : "com.github.bumptech.glide:compiler",
 
             zxing             : "com.google.zxing:core",
             zxingEmbedded     : "com.journeyapps:zxing-android-embedded",

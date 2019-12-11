@@ -9,8 +9,14 @@ import com.alibaba.android.arouter.launcher.ARouter
  */
 abstract class BaseApplication : MultiDexApplication() {
 
+    companion object {
+        lateinit var appContext: BaseApplication
+    }
+
     override fun onCreate() {
         super.onCreate()
+
+        appContext = this
         if (BuildConfig.isOutLog) ARouter.openLog()
         if (BuildConfig.isDebug) ARouter.openDebug()
         ARouter.init(this)

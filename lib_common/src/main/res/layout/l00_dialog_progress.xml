@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    style="@style/L00RootLayout"
     android:layout_height="@dimen/L00BarHeight"
-    android:background="@color/L00Color00"
     android:gravity="center"
     android:orientation="horizontal">
 
