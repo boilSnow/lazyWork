@@ -29,6 +29,7 @@ abstract class ServiceObserver<D>(private val mView: BaseMvpEntente.IView) :
     }
 
     override fun onError(e: Throwable) {
+        e.printStackTrace()
         onError("Net err")
     }
 

@@ -29,14 +29,13 @@ abstract class BaseMvpListActivity<P : BaseMvpEntente.IPresenter, D> : BaseMvpAc
     protected lateinit var mAdapter: BaseRecyclerAdapter<D>
     protected var mDataType = RecyclerFootItemHolder.TYPE.VAIN
 
+    override fun getLayoutID() = R.layout.l00_activity_list
+
     override fun setupViews() {
         mRvList = findViewById(R.id.rvList)
         mSrView = findViewById(R.id.srView)
 
         mRvList?.layoutManager = listLayoutManager()
-    }
-
-    override fun initialized() {
         mAdapter = listAdapter()
         mAdapter.setIsShowFootView(isShowFoot)
 

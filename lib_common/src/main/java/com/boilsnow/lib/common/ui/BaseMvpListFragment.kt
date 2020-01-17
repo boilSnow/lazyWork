@@ -37,9 +37,6 @@ abstract class BaseMvpListFragment<P : BaseMvpEntente.IPresenter, D> : BaseMvpFr
         mSrView = view?.findViewById(R.id.srView)
 
         mRvList?.layoutManager = listLayoutManager()
-    }
-
-    override fun initialized() {
         mAdapter = listAdapter()
         mAdapter.setIsShowFootView(isShowFoot)
 
@@ -61,13 +58,15 @@ abstract class BaseMvpListFragment<P : BaseMvpEntente.IPresenter, D> : BaseMvpFr
                     else -> (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
                 }
                 if (mDataType == RecyclerFootItemHolder.TYPE.DATA_LOADING       //还有更多数据
-                    && layoutManager.childCount > 0                                 //子条目数大于0
-                    && lastVisiblePosition >= layoutManager.itemCount - 1           //当前屏幕显示的最后视图是最后的数据
+                    && layoutManager.childCount > 0                             //子条目数大于0
+                    && lastVisiblePosition >= layoutManager.itemCount - 1       //当前屏幕显示的最后视图是最后的数据
                     && layoutManager.itemCount >= layoutManager.childCount
                 ) onLoadListData()
             }
         })
     }
+
+    override fun firstLoadData(eValue: Int) = onUpdateListData()
 
     protected fun setListData(
         data: ArrayList<D>?, isUpdate: Boolean = true, min: Int = 0, size: Int = 10

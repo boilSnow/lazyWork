@@ -2,6 +2,7 @@ package com.boilsnow.lib.common.ui.assist
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.boilsnow.lib.common.R
@@ -55,6 +56,10 @@ abstract class BaseRecyclerAdapter<D>(protected var mContext: Context) :
     //校验条目视图显示类型
     protected open fun checkItemViewType(position: Int) = super.getItemViewType(position)
 
+    //获取view
+    protected fun createItemView(layoutId: Int, parent: ViewGroup): View =
+        LayoutInflater.from(mContext).inflate(layoutId, parent, false)
+
     //创建条目视图
     protected abstract fun onCreateItemViewHolder(
         parent: ViewGroup, viewType: Int
@@ -62,9 +67,7 @@ abstract class BaseRecyclerAdapter<D>(protected var mContext: Context) :
 
     //创建底部条目视图
     protected open fun createFootViewHolder(parent: ViewGroup): RecyclerFootItemHolder<D> =
-        RecyclerFootItemHolder(
-            LayoutInflater.from(mContext).inflate(R.layout.l00_item_foot, parent, false)
-        )
+        RecyclerFootItemHolder(createItemView(R.layout.l00_item_foot, parent))
 
     //绑定条目视图数据
     protected open fun onBindItemViewHolder(

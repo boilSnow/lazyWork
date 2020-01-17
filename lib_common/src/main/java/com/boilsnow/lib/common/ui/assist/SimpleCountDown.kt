@@ -29,6 +29,6 @@ class SimpleCountDown(future: Long, interval: Long) : CountDownTimer(future, int
     interface OnActionCallback {
         fun onTick(millis: Long)
 
-        fun onFinish()
+        fun onFinish() {}
     }
 }

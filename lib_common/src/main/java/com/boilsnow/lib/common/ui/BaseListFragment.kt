@@ -18,8 +18,8 @@ import java.util.*
  */
 abstract class BaseListFragment<D> : BaseFragment() {
 
-    protected var isUpdateOn = false     //开启刷新
-    protected var isLoadOn = false       //开启加载
+    protected var isUpdateOn = false    //开启刷新
+    protected var isLoadOn = false      //开启加载
     protected var isShowFoot = false    //开启显示底部视图
 
     protected var mRvList: RecyclerView? = null
@@ -36,9 +36,6 @@ abstract class BaseListFragment<D> : BaseFragment() {
         mSrView = view?.findViewById(R.id.srView)
 
         mRvList?.layoutManager = listLayoutManager()
-    }
-
-    override fun initialized() {
         mAdapter = listAdapter()
         mAdapter.setIsShowFootView(isShowFoot)
 

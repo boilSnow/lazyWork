@@ -1,8 +1,8 @@
 package com.boilsnow.lib.common.ui
 
 import com.boilsnow.lib.common.entente.BaseMvpEntente
-import com.boilsnow.lib.common.dialog.DialogPick
-import com.boilsnow.lib.common.dialog.ProgressDialog
+import com.boilsnow.lib.common.ui.assist.DialogPick
+import com.boilsnow.lib.common.ui.assist.ProgressDialog
 
 /**
  * Description:mvp框架activity定义

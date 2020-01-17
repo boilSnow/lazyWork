@@ -9,5 +9,9 @@
     <string name="l00_text_safety">提示</string>
     <string name="l00_text_affirm">确认</string>
     <string name="l00_text_cancel">取消</string>
+    <string name="l00_text_done">完成</string>
+
+    <string name="l00_picture_take_photo">拍照</string>
+    <string name="l00_picture_from_album">从相册</string>
 
 </resources>

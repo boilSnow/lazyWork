@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.launcher.ARouter
+import com.boilsnow.lib.common.config.ExtrasConfig
 import com.boilsnow.lib.common.ui.assist.ToastAss
 import com.boilsnow.lib.common.util.LL
+import java.io.Serializable
 
 /**
  * Description:定义扩展
@@ -42,8 +44,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     open fun onBack(v: View?) = finish()
 
-    protected open fun onSuccessFinish() {
-        setResult(Activity.RESULT_OK)
+    protected open fun onSuccessFinish(extras: Bundle? = null) {
+        val intent = Intent()
+        if (extras != null) intent.putExtras(extras)
+        setResult(Activity.RESULT_OK, intent)
         finish()
     }
 
@@ -60,6 +64,18 @@ abstract class BaseActivity : AppCompatActivity() {
     protected fun toActivity(name: Class<*>, extras: Bundle? = null, requestCode: Int = -1) {
         val intent = Intent(this, name)
         if (extras != null) intent.putExtras(extras)
+        if (requestCode < 0) startActivity(intent) else startActivityForResult(intent, requestCode)
+    }
+
+    protected fun <T : Serializable> toDataActivity(
+        name: Class<*>, data: T? = null, extras: Bundle? = null, requestCode: Int = -1
+    ) {
+        val intent = Intent(this, name)
+        if (extras != null || data != null) {
+            val intentExtras = extras ?: Bundle()
+            if (data != null) intentExtras.putSerializable(ExtrasConfig.ENTER_DATA, data)
+            intent.putExtras(intentExtras)
+        }
         if (requestCode < 0) startActivity(intent) else startActivityForResult(intent, requestCode)
     }
 

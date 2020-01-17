@@ -1,4 +1,4 @@
-package com.boilsnow.lib.common.dialog
+package com.boilsnow.lib.common.ui.assist
 
 import android.app.Dialog
 import android.content.Context
@@ -10,7 +10,7 @@ import com.boilsnow.lib.common.R
  * Description:进度条弹窗
  * Remark:
  */
-class ProgressDialog(mContext: Context) : Dialog(mContext) {
+internal class ProgressDialog(mContext: Context) : Dialog(mContext) {
 
     private var tvText: TextView
 

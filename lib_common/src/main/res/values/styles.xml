@@ -21,6 +21,11 @@
         <item name="android:activityCloseExitAnimation">@anim/l00_right_out</item>
     </style>
 
+    <!--从底部进入动画-->
+    <style name="L00Animation4Bottom">
+        <item name="android:windowEnterAnimation">@anim/l00_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/l00_bottom_out</item>
+    </style>
 
     <!--默认根布局-->
     <style name="L00RootLayout">

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/vTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include layout="@layout/l00_include_top_bar" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvDone"
+        style="@style/L00Text"
+        android:layout_alignTop="@id/vTopBar"
+        android:layout_alignBottom="@id/vTopBar"
+        android:layout_alignParentRight="true"
+        android:paddingRight="15dp"
+        android:text="@string/l00_text_done" />
+
+    <com.boilsnow.lib.common.view.PictureCropView
+        android:id="@+id/pcvView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/vTopBar" />
+
+</RelativeLayout>

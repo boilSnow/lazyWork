@@ -3,9 +3,12 @@ package com.boilsnow.lib.common.util
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Context.ACTIVITY_SERVICE
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.telephony.TelephonyManager
+import android.text.TextUtils
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -98,5 +101,18 @@ object AppTool {
         } else result.add(Locale.getDefault().language)
 
         return result
+    }
+
+    //跳转到谷歌商店
+    fun skipGoogleShop(context: Context, pageName: String) {
+        if (TextUtils.isEmpty(pageName)) return
+        try {
+            val uri = Uri.parse("market://details?id=$pageName")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            intent.setPackage("com.android.vending")
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+        }
     }
 }

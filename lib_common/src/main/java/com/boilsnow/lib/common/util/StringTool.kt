@@ -1,5 +1,12 @@
 package com.boilsnow.lib.common.util
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.os.Build
+import android.text.Html
+import android.text.Spanned
+import android.text.SpannedString
 import android.text.TextUtils
 import com.boilsnow.lib.common.BaseApplication
 import com.google.gson.GsonBuilder
@@ -39,7 +46,7 @@ object StringTool {
     fun time4Second(time: Long): String {
         val second = time % 60
         val minuteTime = time / 60
-        return "$minuteTime : $second"
+        return "$minuteTime:$second"
     }
 
     //转换字符串数组
@@ -62,5 +69,20 @@ object StringTool {
         val result = ArrayList<String>()
         if (!TextUtils.isEmpty(text)) result.addAll(text!!.split(sText))
         return result
+    }
+
+    //复制文本到剪贴板
+    fun copyText2Clipboard(context: Context, text: String) {
+        if (TextUtils.isEmpty(text)) return
+        (context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
+            .primaryClip = ClipData.newPlainText("", text)
+    }
+
+    //转换html文本
+    fun convertText4Html(text: String): Spanned = when {
+        TextUtils.isEmpty(text) -> SpannedString("")
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ->
+            Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY)
+        else -> Html.fromHtml(text)
     }
 }
